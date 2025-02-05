@@ -45,7 +45,7 @@ app.get('/users/:id', (req, res) => {
         return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({ user });
+    res.status(200).json(user);
 });
 
 // PUT(Update) /users/:id
@@ -63,7 +63,7 @@ app.put('/users/:id', (req, res) => {
     user.name = name;
     user.email = email;
 
-    res.status(200).json({ user });
+    res.status(200).json(user);
 });
 
 // DELETE /users/:id
@@ -74,7 +74,7 @@ app.delete('/users/:id', (req, res) => {
     }
 
     const deletedUser = users.splice(userIndex, 1);
-    res.status(200).json();
+    res.status(204).json();
 });
 app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
