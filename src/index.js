@@ -1,5 +1,5 @@
 const express = require('express');
-const { v1: uuidv1 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = 3000;
 
@@ -16,8 +16,8 @@ const users = [];
 app.get('/', (req, res) => {
     res.send('Server is running!');
 });
-//  POST /api/users
-app.post('/api/users', (req, res) => {
+//  POST /users
+app.post('/users', (req, res) => {
 
     const { name, email } = req.body;
 
@@ -27,7 +27,7 @@ app.post('/api/users', (req, res) => {
     }
 
     const newUser = {
-        id: uuidv1(),
+        id: uuidv4(),
         name,
         email
     };
@@ -37,8 +37,8 @@ app.post('/api/users', (req, res) => {
 });
 
 
-// GET /api/users/:id
-app.get('/api/users/:id', (req, res) => {
+// GET /users/:id
+app.get('/users/:id', (req, res) => {
     const user = users.find(u => u.id === req.params.id);
 
     if (!user) {
@@ -48,8 +48,8 @@ app.get('/api/users/:id', (req, res) => {
     res.status(200).json({ user });
 });
 
-// PUT(Update) /api/users/:id
-app.put('/api/users/:id', (req, res) => {
+// PUT(Update) /users/:id
+app.put('/users/:id', (req, res) => {
     const user = users.find(u => u.id === req.params.id);
     if (!user) {
         return res.status(404).json({ error: 'Not Found' });
@@ -66,8 +66,8 @@ app.put('/api/users/:id', (req, res) => {
     res.status(200).json({ message: 'User updated successfully', user });
 });
 
-// DELETE /api/users/:id
-app.delete('/api/users/:id', (req, res) => {
+// DELETE /users/:id
+app.delete('/users/:id', (req, res) => {
     const userIndex = users.findIndex(u => u.id === req.params.id);
     if (userIndex === -1) {
         return res.status(404).json({ error: 'User not found' });
