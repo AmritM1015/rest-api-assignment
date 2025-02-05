@@ -33,7 +33,7 @@ app.post('/users', (req, res) => {
     };
     users.push(newUser);
 
-    res.status(201).json({ message: 'User created successfully', user: newUser });
+    res.status(201).json(newUser);
 });
 
 
@@ -63,7 +63,7 @@ app.put('/users/:id', (req, res) => {
     user.name = name;
     user.email = email;
 
-    res.status(200).json({ message: 'User updated successfully', user });
+    res.status(200).json({ user });
 });
 
 // DELETE /users/:id
@@ -74,7 +74,7 @@ app.delete('/users/:id', (req, res) => {
     }
 
     const deletedUser = users.splice(userIndex, 1);
-    res.status(200).json({ message: 'User deleted successfully', user: deletedUser[0] });
+    res.status(200).json();
 });
 app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
